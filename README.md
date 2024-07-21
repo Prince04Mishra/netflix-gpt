@@ -30,6 +30,7 @@
 - Update store with tailer Video Data.
 - Embedded the youtube video and make it autoplay and mute
 - Tailwind Classes to make main container look awesome.
+- Build Secondary component
 
 # Features
 
