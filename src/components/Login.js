@@ -7,13 +7,12 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BG_IMAGE, USER_AVTAR } from "../utils/constants";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessege, setErrorMessege] = useState(null);
@@ -40,7 +39,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/95128645?v=4",
+            photoURL: USER_AVTAR,
           })
             .then(() => {
               // Profile updated
@@ -53,8 +52,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              // navigate to main content page
-              navigate("/browser");
             })
             .catch((error) => {
               // An error occurred
@@ -75,10 +72,7 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browser");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -105,10 +99,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/655a9668-b002-4262-8afb-cf71e45d1956/5ff265b6-3037-44b2-b071-e81750b21783/IN-en-20240715-POP_SIGNUP_TWO_WEEKS-perspective_WEB_c6d6616f-4478-4ac2-bdac-f54b444771dd_large.jpg"
-          alt="bg-image"
-        />
+        <img src={BG_IMAGE} alt="bg-image" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
